@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import {
-    CarouselControl,
-    Carousel,
-    CarouselItem,
-    CarouselIndicators,
-} from 'reactstrap';
+import {HomeCarousel} from './HomeCarousel'
 export class Home extends Component {
   static displayName = Home.name;
 
   render () {
     return (
-      <div>
+        <div>
+            <HomeCarousel/>
             <h1>Hello, asd !</h1>
       
       </div>
