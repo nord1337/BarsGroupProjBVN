@@ -8,7 +8,6 @@ export class Home extends Component {
         <div>
             <HomeCarousel/>
             <h1>Hello, asd !</h1>
-      
       </div>
     );
   }
