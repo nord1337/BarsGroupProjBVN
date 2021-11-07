@@ -8,7 +8,7 @@ export class CarsView extends Component {
         return (
             <div>
             <h2>CARS</h2>
-            <Button class="Btn-danger">hehe</Button>
+            <Button class="Btn-danger">haha</Button>
             </div>
             );
 
