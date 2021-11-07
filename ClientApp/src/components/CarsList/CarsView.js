@@ -12,8 +12,8 @@ export class CarsView extends Component {
               <Card>
                 <CardImg
                   alt="Card image cap"
-                  src="https://picsum.photos/318/180"
-                  top
+                  src="https://avatars.mds.yandex.net/get-verba/787013/2a000001609d49f598cf1c7e416f7cdea43f/cattouch"
+                  top          
                   width="100%"
                 />
                 <CardBody>
@@ -37,7 +37,7 @@ export class CarsView extends Component {
               <Card>
                 <CardImg
                   alt="Card image cap"
-                  src="https://picsum.photos/318/180"
+                  src="https://xn--80aal0a.xn--80asehdb/uploads/posts/2016-07/1467621243_logo.jpg"
                   top
                   width="100%"
                 />
@@ -62,7 +62,7 @@ export class CarsView extends Component {
               <Card>
                 <CardImg
                   alt="Card image cap"
-                  src="https://picsum.photos/318/180"
+                  src="https://versiya.info/uploads/posts/2019-11/1573731926_1.jpg"
                   top
                   width="100%"
                 />
