@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle,CardText, Button} from 'reactstrap';
+import "./../ServicesList/ServicesView.css"
 
 export class CarsView extends Component {
 
