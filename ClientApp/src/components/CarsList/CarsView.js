@@ -19,19 +19,19 @@ export class CarsView extends Component {
                 />
                 <CardBody>
                   <CardTitle tag="h5">
-                    Приорка 
+                    Приорка серая
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    Card subtitle
+                    Обычная
                   </CardSubtitle>
-                  <CardText>
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            <CardText>
+                                Прекрасная машина. Топ за свои деньги!
                   </CardText>
                   <Button>
-                    Button
+                    Заказать
                   </Button>
                 </CardBody>
               </Card>
@@ -44,19 +44,19 @@ export class CarsView extends Component {
                 />
                 <CardBody>
                   <CardTitle tag="h5">
-                    Card title
+                    Приорка белая
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    Card subtitle
+                    Обычная
                   </CardSubtitle>
                   <CardText>
-                    This card has supporting text below as a natural lead-in to additional content.
+                    Такой же топ как и серая, можешь взять и ее!
                   </CardText>
                   <Button>
-                    Button
+                    Заказать
                   </Button>
                 </CardBody>
               </Card>
@@ -69,19 +69,19 @@ export class CarsView extends Component {
                 />
                 <CardBody>
                   <CardTitle tag="h5">
-                    Card title
+                    Приорка черная
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    Card subtitle
+                    БПАН
                   </CardSubtitle>
-                  <CardText>
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.
+                            <CardText>
+                                Самый лучший вариант из всех предложенных. Будешь самым крутым на районе инфа сотка!
                   </CardText>
                   <Button>
-                    Button
+                    Заказать.
                   </Button>
                 </CardBody>
               </Card>
