@@ -1,0 +1,10 @@
+﻿.card-group {
+    padding: 0 15px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.card {
+    margin: 0 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.125) !important;
+    box-shadow: 0 2px 20px #e5e7ee;
+}
