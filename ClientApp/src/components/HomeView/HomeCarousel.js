@@ -2,19 +2,22 @@
 import React, { Component } from 'react';
 const items = [
     {
-        src: 'https://m.ecoteka.ru/upload/iblock/51c/51c63ba446395bb4fea218f79a259ac5.jpg',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Lada_Granta_2018_facelift.jpg',
         altText: '',
-        caption: ''
+        top: 'Грантич',
+        caption: 'топич'
     },
     {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Water_drop_impact_on_a_water-surface_-_%282%29.jpg/1200px-Water_drop_impact_on_a_water-surface_-_%282%29.jpg',
+        src: 'https://pokatim.ru/uploads/posts/2018-09/1536753664_priora.jpg',
         altText: '',
-        caption: 'Freedom Isn\'t Free'
+        top: 'Приора жи есть',
+        caption: 'вайвай какая'
     },
     {
         src: 'https://versiya.info/uploads/posts/2019-11/1573731926_1.jpg',
         altText: '',
-        caption: ''
+        top: 'низкий таз',
+        caption: 'радует глаз'
     }
 ];
 
@@ -65,8 +68,8 @@ export class HomeCarousel extends Component {
                     onExited={this.onExited}
                     key={item.src}
                 >
-                    <img src={item.src} alt={item.altText} />
-                    <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+                    <img src={item.src} alt={item.altText} width="100%" height="600" />
+                    <CarouselCaption captionText={item.caption} captionHeader={item.top} />
                 </CarouselItem>
             );
         });
