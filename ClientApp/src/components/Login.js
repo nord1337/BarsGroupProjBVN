@@ -21,7 +21,7 @@ export class Login extends Component {
             <div>
                 <Button color="light" onClick={this.toggle}> Log in </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}>{this.props.title} Registration</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>{this.props.title} Login</ModalHeader>
                     <ModalBody>
                         {this.props.modal}
                         <Form>
