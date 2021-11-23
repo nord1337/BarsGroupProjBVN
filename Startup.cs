@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using Team_Let1m_carShop.Data;
 
 namespace Team_Let1m_carShop
@@ -30,14 +31,18 @@ namespace Team_Let1m_carShop
                 opt.EnableSensitiveDataLogging(true);
                 opt.LogTo(System.Console.WriteLine);
             });
-           
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // reflection 
+
+            services.AddScoped<IUserRepository, UserSqlRepository>();
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
