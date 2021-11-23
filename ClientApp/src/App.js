@@ -4,7 +4,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/HomeView/Home';
 import { CarsView } from './components/CarsList/CarsView';
 import { ServicesView } from './components/ServicesList/ServicesView';
-import { Login } from './components/Login';
+//import { Login } from './components/Login';
 import './custom.css';
 
 export default class App extends Component {

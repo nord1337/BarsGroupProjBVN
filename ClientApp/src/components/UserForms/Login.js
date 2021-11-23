@@ -5,9 +5,21 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false
+            modal: false,
+            email:"",
+            password:"",
+            loginErrors:""
         };
         this.toggle = this.toggle.bind(this);
+        //this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleChange=this.handleChange.bind(this);
+
+    }
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+        //console.log(this.state.email)
     }
 
     toggle() {
@@ -39,6 +51,10 @@ export class Login extends Component {
                                         name="email"
                                         placeholder="something@idk.cool"
                                         type="email"
+                                        value={this.state.email}
+                                        onChange={this.handleChange}
+                                        required
+
                                     />
                                 </FormGroup>
                             </div>
@@ -55,6 +71,9 @@ export class Login extends Component {
                                         name="password"
                                         placeholder="don't tell!"
                                         type="password"
+                                        value={this.state.password}
+                                        onChange={this.handleChange}
+                                        required
                                     />
                                 </FormGroup>
                             </div>

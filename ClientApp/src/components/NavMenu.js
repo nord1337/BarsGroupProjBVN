@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import {Collapse, Container, DropdownItem, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink,DropdownToggle,DropdownMenu,UncontrolledDropdown} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
-import {Login} from "./Login";
-
+import {Login} from "./UserForms/Login";
+import {Register} from "./UserForms/Register";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -38,9 +38,31 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/Cars">Cars</NavLink>
                 </NavItem>
-                <NavItem>
-                   <Login/>
-                </NavItem>
+
+
+                <UncontrolledDropdown
+                    inNavbar
+                    nav
+                >
+                  <DropdownToggle
+                      caret
+                      nav
+                  >
+                    Options
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <Login/>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Register/>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      Logout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </ul>
             </Collapse>
           </Container>
