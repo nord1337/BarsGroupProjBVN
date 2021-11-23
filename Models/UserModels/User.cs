@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Npgsql.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Team_Let1m_carShop.Models
 {
@@ -19,8 +20,10 @@ namespace Team_Let1m_carShop.Models
         [Required]
         public string Lastname { get; set; }
 
+
         [Required]
         [DataType(DataType.Password)]
+        [JsonIgnore]
         public string PasswordHash { get; set; }
 
         [Required]

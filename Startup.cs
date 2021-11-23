@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using Team_Let1m_carShop.Data;
+using Team_Let1m_carShop.Helpers;
 
 namespace Team_Let1m_carShop
 {
@@ -22,7 +23,7 @@ namespace Team_Let1m_carShop
         
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors();
             services.AddControllersWithViews();
 
             services.AddDbContext<ShopContext>(opt =>
@@ -33,6 +34,8 @@ namespace Team_Let1m_carShop
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // reflection 
+
+            services.AddScoped<JwtService>(); 
 
             services.AddScoped<IUserRepository, UserSqlRepository>();
 
@@ -58,7 +61,12 @@ namespace Team_Let1m_carShop
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors(opt=> opt
+                .WithOrigins(new[] { "http://localhost:3000" })
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+             );
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

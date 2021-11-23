@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Team_Let1m_carShop.Data;
 using Team_Let1m_carShop.Dtos;
+using Team_Let1m_carShop.Helpers;
 using Team_Let1m_carShop.Models;
 
 namespace Team_Let1m_carShop.Controllers
@@ -17,10 +18,12 @@ namespace Team_Let1m_carShop.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public AuthController(IUserRepository userRepository,IMapper mapper)
+        private readonly JwtService _jwtService;
+        public AuthController(IUserRepository userRepository,IMapper mapper,JwtService jwtService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _jwtService = jwtService;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto registerDto)
@@ -29,7 +32,59 @@ namespace Team_Let1m_carShop.Controllers
             UserEntity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(UserEntity.PasswordHash); // Hashing password
 
             _userRepository.Create(UserEntity);
-            return Created("Sucess",UserEntity);
+            if (_userRepository.SaveChanges())
+                return Created("Sucess",UserEntity);
+            return BadRequest();
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserLoginDto loginDto)
+        {
+            var User = _userRepository.getByEmail(loginDto.Email);
+
+            if (User == null)
+                return BadRequest();
+
+            if (!BCrypt.Net.BCrypt.Verify(loginDto.PasswordHash, User.PasswordHash))
+                return BadRequest();
+
+            var jwt = _jwtService.Generate(User.Id);
+
+            Response.Cookies.Append("jwt",jwt,new CookieOptions()
+            {
+                HttpOnly = true
+            });
+
+            return Ok();
+        }
+        [HttpGet("user")]
+        public async Task<IActionResult> User ()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var token = _jwtService.Verify(jwt);
+
+                int UserId = int.Parse(token.Issuer);
+
+                var User = _userRepository.getById(UserId);
+            
+                return Ok(User);
+
+            }
+            catch (Exception)
+            {
+
+                return Unauthorized();
+            }
+            
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            Response.Cookies.Delete("jwt");
+            return Ok(new { message = "succes" });
         }
     }
 }
