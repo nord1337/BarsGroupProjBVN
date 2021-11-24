@@ -4,12 +4,18 @@ import { NavMenu } from './NavMenu';
 
 export class Layout extends Component {
   static displayName = Layout.name;
+  constructor(props) {
+      super(props);
+
+  }
 
   render () {
     return (
       <div>
-        <NavMenu />
+          <NavMenu loggedInStatus={this.props.loggedInStatus} handleLogout = {this.props.handleLogout} />
+
         <Container>
+
           {this.props.children}
         </Container>
       </div>

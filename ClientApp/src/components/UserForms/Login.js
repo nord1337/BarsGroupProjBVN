@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
-import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Redirect} from "react-router-dom";
 
 export class Login extends Component {
     constructor(props) {
@@ -7,11 +8,11 @@ export class Login extends Component {
         this.state = {
             modal: false,
             email:"",
-            password:"",
+            passwordHash:"",
             loginErrors:""
         };
         this.toggle = this.toggle.bind(this);
-        //this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
         this.handleChange=this.handleChange.bind(this);
 
     }
@@ -20,6 +21,24 @@ export class Login extends Component {
             [event.target.name]: event.target.value
         });
         //console.log(this.state.email)
+    }
+    async handleSubmit(event){
+        event.preventDefault();
+        const {email,passwordHash} = this.state
+
+        const  response = await fetch('http://localhost:5000/api/auth/login',{
+            method:'POST',
+            headers:{'Content-type':'application/json'},
+            credentials:'include',
+            body:JSON.stringify(
+                {
+                    email,
+                    passwordHash
+                })
+        });
+        const content = await response.json();
+
+
     }
 
     toggle() {
@@ -68,10 +87,10 @@ export class Login extends Component {
                                     </Label>
                                     <Input
                                         id="examplePassword"
-                                        name="password"
+                                        name="passwordHash"
                                         placeholder="don't tell!"
                                         type="password"
-                                        value={this.state.password}
+                                        value={this.state.passwordHash}
                                         onChange={this.handleChange}
                                         required
                                     />
@@ -80,7 +99,7 @@ export class Login extends Component {
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle}>OK</Button>
+                        <Button color="secondary" onClick={this.handleSubmit}>OK</Button>
                     </ModalFooter>
                 </Modal>
             </div>

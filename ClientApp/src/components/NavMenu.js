@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import {Collapse, Container, DropdownItem, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink,DropdownToggle,DropdownMenu,UncontrolledDropdown} from 'reactstrap';
+import {
+  Collapse,
+  Container,
+  DropdownItem,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+  DropdownToggle,
+  DropdownMenu,
+  UncontrolledDropdown,
+  Button
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import {Login} from "./UserForms/Login";
 import {Register} from "./UserForms/Register";
+import {render} from "react-dom";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -12,6 +26,7 @@ export class NavMenu extends Component {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.state = {
       collapsed: true
       };
@@ -22,6 +37,22 @@ export class NavMenu extends Component {
       collapsed: !this.state.collapsed
     });
   }
+ async handleLogoutClick() {
+    const response = await fetch('http://localhost:5000/api/auth/logout',{
+      method:'POST',
+      headers:{'Content-type':'application/json'},
+      credentials:'include',
+
+    });
+    if(response.ok){
+      this.props.handleLogout();
+    }
+    else{
+      console.log("cannot logout......");
+    }
+
+  }
+
 
   render () {
     return (
@@ -39,35 +70,78 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/Cars">Cars</NavLink>
                 </NavItem>
 
+                <DependentDropDown loggedInStatus={this.props.loggedInStatus} handleLogoutClick = {this.handleLogoutClick}/>
 
-                <UncontrolledDropdown
-                    inNavbar
-                    nav
-                >
-                  <DropdownToggle
-                      caret
-                      nav
-                  >
-                    Options
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem>
-                      <Login/>
-                    </DropdownItem>
-                    <DropdownItem>
-                      <Register/>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>
-                      Logout
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
               </ul>
             </Collapse>
           </Container>
         </Navbar>
       </header>
     );
+  }
+}
+
+class DependentDropDown extends Component{
+  constructor(props) {
+    super(props);
+
+
+  }
+  render() {
+    if(this.props.loggedInStatus==="LOGGED_IN"){
+      return(
+          <UncontrolledDropdown
+              inNavbar
+              nav
+          >
+            <DropdownToggle
+                caret
+                nav
+            >
+              Options
+            </DropdownToggle>
+            <DropdownMenu right>
+
+              <DropdownItem>
+                My profile
+              </DropdownItem>
+
+              <DropdownItem divider />
+              <DropdownItem>
+                <Button onClick={this.props.handleLogoutClick}>Log out</Button>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+      )
+    }
+    else if(this.props.loggedInStatus==="NOT_LOGGED_IN"){
+      return (
+          <UncontrolledDropdown
+              inNavbar
+              nav
+          >
+            <DropdownToggle
+                caret
+                nav
+            >
+              Options
+            </DropdownToggle>
+            <DropdownMenu right>
+
+              <DropdownItem>
+
+                <Login/>
+              </DropdownItem>
+              <DropdownItem>
+                <Register/>
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>
+                Logout
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+      )
+    }
   }
 }

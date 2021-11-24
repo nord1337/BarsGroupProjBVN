@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import {Redirect} from "react-router-dom";
+import {Login} from "./Login";
+import {Home} from "../HomeView/Home";
 
 export class Register extends Component {
 
@@ -12,9 +15,11 @@ export class Register extends Component {
             lastname:"",
             phonenumber:"",
             email:"",
-            password:""
+            passwordHash:""
 
         };
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleChange=this.handleChange.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -22,6 +27,42 @@ export class Register extends Component {
         this.setState({
             modal: !this.state.modal
         });
+    }
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+
+    }
+    async handleSubmit(event){
+
+        const {firstname,lastname,phonenumber,email,passwordHash} = this.state
+        let redirect = false;
+        const  response = await fetch('http://localhost:5000/api/auth/register',{
+            method:'POST',
+            headers:{'Content-type':'application/json'},
+            body:JSON.stringify(
+                {
+                    firstname,
+                    lastname,
+                    phonenumber,
+                    email,
+                    passwordHash
+                })
+        });
+
+        const content = await response.json();
+        redirect=true;
+        console.log(redirect);
+        event.preventDefault();
+        if(redirect){
+
+            this.setState({
+                modal: !this.state.modal
+            });
+        }
+
+
     }
 
     render() {
@@ -38,14 +79,17 @@ export class Register extends Component {
 
                                     <Label
                                         className="me-sm-2"
-                                        for="Firstname"
+                                        for="firstname"
                                     >
                                         First name
                                     </Label>
                                     <Input
-                                        id="Firstname"
-                                        name="Firstname"
+                                        id="firstname"
+                                        name="firstname"
                                         type="text"
+                                        value={this.state.firstname}
+                                        onChange={this.handleChange}
+                                        required
                                     />
                                 </FormGroup>
                             </div>
@@ -59,9 +103,11 @@ export class Register extends Component {
                                         Last name
                                     </Label>
                                     <Input
-                                        id="Lastname"
-                                        name="Lastname"
+                                        id="lastname"
+                                        name="lastname"
                                         type="text"
+                                        value={this.state.lastname}
+                                        onChange={this.handleChange}
                                     />
                                 </FormGroup>
                             </div>
@@ -70,14 +116,16 @@ export class Register extends Component {
 
                                     <Label
                                         className="me-sm-2"
-                                        for="Phonenumber"
+                                        for="phonenumber"
                                     >
                                         Phone number
                                     </Label>
                                     <Input
-                                        id="Phonenumber"
-                                        name="Lastname"
+                                        id="phonenumber"
+                                        name="phonenumber"
                                         type="phone"
+                                        value={this.state.phonenumber}
+                                        onChange={this.handleChange}
                                     />
                                 </FormGroup>
                             </div>
@@ -95,6 +143,8 @@ export class Register extends Component {
                                         name="email"
                                         placeholder="something@idk.cool"
                                         type="email"
+                                        value={this.state.email}
+                                        onChange={this.handleChange}
                                     />
                                 </FormGroup>
                             </div>
@@ -108,16 +158,18 @@ export class Register extends Component {
                                     </Label>
                                     <Input
                                         id="examplePassword"
-                                        name="password"
+                                        name="passwordHash"
                                         placeholder="don't tell!"
                                         type="password"
+                                        value={this.state.passwordHash}
+                                        onChange={this.handleChange}
                                     />
                                 </FormGroup>
                             </div>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle}>Go</Button>
+                        <Button color="secondary" onClick={this.handleSubmit}>Go</Button>
                     </ModalFooter>
                 </Modal>
             </div>
