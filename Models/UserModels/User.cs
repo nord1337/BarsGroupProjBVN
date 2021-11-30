@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Npgsql.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Team_Let1m_carShop.Models
@@ -33,5 +34,8 @@ namespace Team_Let1m_carShop.Models
         [Required]
         [Phone]
         public string Phonenumber { get; set; }
+
+        public List<Order> Orders { get; set; }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Team_Let1m_carShop.Models;
 
+
 namespace Team_Let1m_carShop.Data
 {
     public class ShopContext: DbContext
@@ -14,6 +15,11 @@ namespace Team_Let1m_carShop.Data
 
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order_item> OrderItems { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +28,10 @@ namespace Team_Let1m_carShop.Data
                 user.HasIndex(u => u.Email).IsUnique();
                 user.HasIndex(u => u.Phonenumber).IsUnique();
             });
+            modelBuilder.Entity<Order_item>().HasOne<Order>(o => o.Order);
+
+           
+
         }
     }
 }

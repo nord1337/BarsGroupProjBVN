@@ -46,7 +46,13 @@ export default class App extends Component {
     }
 
     async componentDidMount() {
-        await this.checkLoginStatus();
+        try {
+            await this.checkLoginStatus();
+        }
+        catch (e) {
+            console.log("server not responding")
+        }
+
 
     }
 
