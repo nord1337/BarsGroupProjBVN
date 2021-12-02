@@ -21,12 +21,10 @@ namespace Team_Let1m_carShop.Data
         {
             return _shopContext.Users.First(u => u.Email == email);
         }
-
         public User getById(int id)
         {
             return _shopContext.Users.FirstOrDefault(u => u.Id == id);
         }
-
         public bool SaveChanges()
         {
             return (_shopContext.SaveChanges() >= 0);

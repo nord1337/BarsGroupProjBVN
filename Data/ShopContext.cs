@@ -35,7 +35,7 @@ namespace Team_Let1m_carShop.Data
                 order.ToTable("Orders");
                 order.HasKey(k => k.Id);
                 order.HasMany<Order_item>("Order_Items").WithOne(o => o.Order);
-                //order.OwnsMany<Order_item>(oi=>oi.Order_Items);
+               
             });
 
             modelBuilder.Entity<Order_item>(oi =>
