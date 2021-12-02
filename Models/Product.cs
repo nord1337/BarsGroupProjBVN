@@ -8,7 +8,7 @@ namespace Team_Let1m_carShop.Models
         [Key]
         public int Id { get; set; }
         
-        
+        [Required]
         public int CategoryId { get; set; }
 
         [Required]

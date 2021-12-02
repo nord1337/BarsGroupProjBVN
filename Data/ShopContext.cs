@@ -27,10 +27,25 @@ namespace Team_Let1m_carShop.Data
             {
                 user.HasIndex(u => u.Email).IsUnique();
                 user.HasIndex(u => u.Phonenumber).IsUnique();
+                user.HasMany<Order>("Orders").WithOne(u => u.User);
             });
-            modelBuilder.Entity<Order_item>().HasOne<Order>(o => o.Order);
 
-           
+            modelBuilder.Entity<Order>(order =>
+            {
+                order.ToTable("Orders");
+                order.HasKey(k => k.Id);
+                order.HasMany<Order_item>("Order_Items").WithOne(o => o.Order);
+                //order.OwnsMany<Order_item>(oi=>oi.Order_Items);
+            });
+
+            modelBuilder.Entity<Order_item>(oi =>
+            {
+
+                oi.HasOne<Order>("Order").WithMany(o => o.Order_Items);
+
+            });
+
+            base.OnModelCreating(modelBuilder);
 
         }
     }
