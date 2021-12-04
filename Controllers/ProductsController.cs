@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Team_Let1m_carShop.Data;
 
 namespace Team_Let1m_carShop.Controllers
 {
@@ -11,9 +12,18 @@ namespace Team_Let1m_carShop.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        public ProductsController()
+        private readonly IShopRepository _shopRepository;
+        public ProductsController(IShopRepository shopRepository)
         {
-                
+            _shopRepository = shopRepository;
         }
+
+        [HttpGet("products")]
+        public async Task<IActionResult> Products()
+        {
+            var products = await _shopRepository.getAllAsync();
+            return Ok(products);
+        }
+
     }
 }

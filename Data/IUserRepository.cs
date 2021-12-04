@@ -8,9 +8,9 @@ namespace Team_Let1m_carShop.Data
 {
     public interface IUserRepository
     {
-        void Create(User user);
-        User getByEmail(string email);
-        User getById(int id);
-        bool SaveChanges();
+        Task CreateAsync(User user);
+        Task<User> getByEmailAsync(string email);
+        Task<User> getByIdAsync(int id);
+        Task<bool> SaveChangesAsync();
     }
 }

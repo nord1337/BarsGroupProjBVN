@@ -31,15 +31,15 @@ namespace Team_Let1m_carShop.Controllers
             var UserEntity = _mapper.Map<User>(registerDto);
             UserEntity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(UserEntity.PasswordHash); // Hashing password
 
-            _userRepository.Create(UserEntity);
-            if (_userRepository.SaveChanges())
+            await _userRepository.CreateAsync(UserEntity);
+            if (await _userRepository.SaveChangesAsync())
                 return Created("Sucess",UserEntity);
             return BadRequest();
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto loginDto)
         {
-            var User = _userRepository.getByEmail(loginDto.Email);
+            var User = await _userRepository.getByEmailAsync(loginDto.Email);
 
             if (User == null)
                 return BadRequest();
@@ -53,6 +53,7 @@ namespace Team_Let1m_carShop.Controllers
             {
                 HttpOnly = true
             });
+            
 
             return Ok();
         }
@@ -67,9 +68,9 @@ namespace Team_Let1m_carShop.Controllers
 
                 int UserId = int.Parse(token.Issuer);
 
-                var User = _userRepository.getById(UserId);
+                var user = await _userRepository.getByIdAsync(UserId);
             
-                return Ok(User);
+                return Ok(user);
 
             }
             catch (Exception)
@@ -84,7 +85,7 @@ namespace Team_Let1m_carShop.Controllers
         public async Task<IActionResult> Logout()
         {
             Response.Cookies.Delete("jwt");
-            return Ok(new { message = "succes" });
+            return await Task.FromResult(Ok(new { message = "succes" }));
         }
     }
 }

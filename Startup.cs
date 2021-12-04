@@ -39,6 +39,8 @@ namespace Team_Let1m_carShop
 
             services.AddScoped<IUserRepository, UserSqlRepository>();
 
+            services.AddScoped<IShopRepository, ProductSqlRepository>();
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";

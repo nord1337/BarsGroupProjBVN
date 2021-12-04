@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Team_Let1m_carShop.Models;
@@ -16,7 +15,7 @@ namespace Team_Let1m_carShop.Data
             _shopContext = shopContext;
         }
 
-        public async Task Create(Product entity)
+        public async Task CreateAsync(Product entity)
         {
             await _shopContext.Products.AddAsync(entity);
         }
@@ -28,21 +27,31 @@ namespace Team_Let1m_carShop.Data
 
         public async Task<IEnumerable<Product>> getAllAsync()
         {
-            var products =await _shopContext.Products.ToListAsync();
+            var products = await _shopContext.Products
+                .AsNoTracking()
+                .ToListAsync();
             return products;
         }
 
-        public Task<Product> getByCategoryAsync(Category category)
+        public async Task<IEnumerable<Product>> getByCategoryAsync(Category category)
         {
-            
+            var products = await _shopContext.Products
+                .AsNoTracking()
+                .Where(pr => pr.Category == category)
+                .ToListAsync();
+            return products;
         }
 
-        public Task<bool> SaveChangesAsync()
+        public async Task<bool> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            var changes =await _shopContext.SaveChangesAsync();
+            if (changes >= 0)
+                return true;
+            return false;
+
         }
 
-        public Task Update(Product entity)
+        public Task UpdateAsync(Product entity)
         {
             throw new NotImplementedException();
         }

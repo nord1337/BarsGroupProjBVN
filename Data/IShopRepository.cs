@@ -7,7 +7,7 @@ using Team_Let1m_carShop.Models;
 
 namespace Team_Let1m_carShop.Data
 {
-    interface IShopRepository:IRepositoryBase<Product>
+    public interface IShopRepository:IRepositoryBase<Product>
     {
         Task<IEnumerable<Product>> getByCategoryAsync(Category category);
         Task<IEnumerable<Product>> getAllAsync();

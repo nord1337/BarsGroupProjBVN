@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,21 +14,24 @@ namespace Team_Let1m_carShop.Data
         {
             _shopContext = context;
         }
-        public void Create(User user)
+        public async Task CreateAsync(User user)
         {
-            _shopContext.Users.Add(user);   
+            await _shopContext.Users.AddAsync(user);   
         }
-        public User getByEmail(string email)
+        public async Task<User> getByEmailAsync(string email)
         {
-            return _shopContext.Users.First(u => u.Email == email);
+            return await _shopContext.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
-        public User getById(int id)
+        public async Task<User> getByIdAsync(int id)
         {
-            return _shopContext.Users.FirstOrDefault(u => u.Id == id);
+            return await _shopContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return (_shopContext.SaveChanges() >= 0);
+            var changes = await _shopContext.SaveChangesAsync();
+            if (changes >= 0)
+                return true;
+            return false;
         }
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Team_Let1m_carShop.Data.BaseRepos
 {
-    interface IRepositoryBase<T>
+    public interface IRepositoryBase<T>
     {
         
-        Task Create(T entity); 
-        Task Update(T entity);
+        Task CreateAsync(T entity); 
+        Task UpdateAsync(T entity);
         void Delete(T entity);
         Task<bool> SaveChangesAsync();
     }
