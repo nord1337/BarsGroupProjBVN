@@ -6,8 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Team_Let1m_carShop.Data;
 using Team_Let1m_carShop.Helpers;
+using Newtonsoft.Json.Serialization;
 
 namespace Team_Let1m_carShop
 {
@@ -24,7 +27,8 @@ namespace Team_Let1m_carShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<ShopContext>(opt =>
             {
@@ -33,6 +37,8 @@ namespace Team_Let1m_carShop
                 opt.LogTo(System.Console.WriteLine);
             });
 
+            
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // reflection 
 
             services.AddScoped<JwtService>(); 
@@ -40,6 +46,8 @@ namespace Team_Let1m_carShop
             services.AddScoped<IUserRepository, UserSqlRepository>();
 
             services.AddScoped<IShopRepository, ProductSqlRepository>();
+
+            services.AddScoped<IOrderRepository, OrderSqlRepository>();
 
             services.AddSpaStaticFiles(configuration =>
             {

@@ -7,9 +7,10 @@ using Team_Let1m_carShop.Models;
 
 namespace Team_Let1m_carShop.Data
 {
-    interface IOrderRepository:IRepositoryBase<Order>
+    public interface IOrderRepository:IRepositoryBase<Order>
     {
-        Order getByUser(User user);
+        Task<IEnumerable<Order>> getAllUserOrdersAsync(User user);
+        Task<Order> CreateOrderAsync (User user, Order order);
 
     }
 }

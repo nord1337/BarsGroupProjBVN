@@ -15,6 +15,13 @@ namespace Team_Let1m_carShop.Profiles
             //For registrate user
             CreateMap<UserRegisterDto, User>();
 
+            CreateMap<Order, OrderDto>();
+            CreateMap<Order_item, Order_itemDto>();
+            CreateMap<Product, ProductDto>();
+            CreateMap<Category, CategoryDto>();
+
+            CreateMap<OrderItemCreateDto,Order_item>();
+            CreateMap<ProductToOfferDto, Product>();
 
         }
     }
