@@ -7,6 +7,8 @@ namespace Team_Let1m_carShop.Dtos
 {
     public class CategoryDto
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
     }
 }

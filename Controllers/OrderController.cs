@@ -72,8 +72,7 @@ namespace Team_Let1m_carShop.Controllers
                 CreatedAt=DateTime.Now,
                 Order_Items=order_items
             };
-            //TODO: add exisitng products to products 
-
+            
             await _orderRepository.CreateAsync(order);
 
             if(await _orderRepository.SaveChangesAsync())

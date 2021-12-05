@@ -37,7 +37,7 @@ namespace Team_Let1m_carShop.Data
         {
             var products = await _shopContext.Products
                 .AsNoTracking()
-                .Where(pr => pr.Category == category)
+                .Where(pr => pr.CategoryId == category.Id)
                 .ToListAsync();
             return products;
         }
@@ -51,9 +51,10 @@ namespace Team_Let1m_carShop.Data
 
         }
 
-        public Task UpdateAsync(Product entity)
+        public async Task UpdateAsync(Product entity)
         {
-            throw new NotImplementedException();
+            _shopContext.Products.Update(entity);
+            await _shopContext.SaveChangesAsync();
         }
     }
 }

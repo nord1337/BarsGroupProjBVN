@@ -19,7 +19,15 @@ namespace Team_Let1m_carShop.Data
 
         public async Task CreateAsync(Order order)
         {
+            //shitcode
+            var productsIds = (order.Order_Items.Select(x => x.Product.Id)).ToList();
+            
+            foreach(var order_Item in order.Order_Items)
+            {
+                order_Item.Product = _shopContext.Products.Where(x => x.Id == order_Item.ProductId).FirstOrDefault();
+            }
 
+            //shitcode ends
             await _shopContext.Orders.AddAsync(order);
         }
 
