@@ -6,6 +6,8 @@ import { CarsView } from './components/CarsList/CarsView';
 import { ServicesView } from './components/ServicesList/ServicesView';
 //import { Login } from './components/Login';
 import './custom.css';
+import axios from "axios";
+import ProductService from "./components/api/ProductService";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -14,14 +16,18 @@ export default class App extends Component {
 
         this.state = {
             loggedInStatus: "NOT_LOGGED_IN",
-            user: {}
+            user: {},
+
         };
 
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+
     }
 
-   async checkLoginStatus() {
+
+
+    async checkLoginStatus() {
         const response = await fetch('http://localhost:5000/api/auth/user',{
             method:'GET',
             headers:{'Content-type':'application/json'},
@@ -43,11 +49,14 @@ export default class App extends Component {
                 user: {}
             });
         }
+
     }
 
     async componentDidMount() {
         try {
             await this.checkLoginStatus();
+
+
         }
         catch (e) {
             console.log("server not responding")
@@ -85,7 +94,8 @@ export default class App extends Component {
 
 
             }/>
-        <Route path='/Cars' component={CarsView} />
+        <Route path='/Cars'component={CarsView} />
+
         <Route path='/Services' component={ServicesView} />
       </Layout>
     );

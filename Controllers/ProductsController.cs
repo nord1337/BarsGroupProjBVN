@@ -30,7 +30,7 @@ namespace Team_Let1m_carShop.Controllers
             return Ok(products);
         }
 
-        [HttpGet("byCat")]
+        [HttpPost("byCat")]
         public async Task<IActionResult> GetByCategory(CategoryDto categoryDto)
         {
 
