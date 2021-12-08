@@ -17,11 +17,12 @@ export class Home extends Component {
     return (
         <div>
 
-            <h1>Salam, {this.props.user.firstname} , {this.props.user.email}!Status:{this.props.loggedInStatus}</h1>
+            <h1>Salam, {this.props.user.firstname} !</h1>
+            {/*{console.log(this.props.user)}*/}
 
             <HomeCarousel/>
 
-            <h1>Hello, asd !</h1>
+
 
       </div>
     );

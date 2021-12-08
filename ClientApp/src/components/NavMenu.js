@@ -90,6 +90,9 @@ class DependentDropDown extends Component{
   render() {
     if(this.props.loggedInStatus==="LOGGED_IN"){
       return(
+          // здесь ссылка на корзину
+          // ссылка на профиль
+          //ссылка на заказы
           <UncontrolledDropdown
               inNavbar
               nav
@@ -103,7 +106,14 @@ class DependentDropDown extends Component{
             <DropdownMenu right>
 
               <DropdownItem>
-                My profile
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/ProfilePage">My Profile</NavLink>
+                </NavItem>
+              </DropdownItem>
+              <DropdownItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/OrderTab">My Orders</NavLink>
+                </NavItem>
               </DropdownItem>
 
               <DropdownItem divider />

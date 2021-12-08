@@ -16,11 +16,26 @@ export default class ProductService{
             console.log(e);
         }
     }
+
     static async getServices(){
         try{
             const response=await axios.get('http://localhost:5000/api/products/all');
 
             const products = response.data;
+
+        }
+        catch (e){
+            console.log(e);
+        }
+    }
+
+    static async getUserOrders(){
+        try{
+            const response=await axios.get('http://localhost:5000/api/order/orders');
+
+            const products = response.data;
+
+            return products
 
         }
         catch (e){

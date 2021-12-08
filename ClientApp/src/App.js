@@ -8,6 +8,8 @@ import { ServicesView } from './components/ServicesList/ServicesView';
 import './custom.css';
 import axios from "axios";
 import ProductService from "./components/api/ProductService";
+import {OrderTab} from "./components/UserForms/OrderTab";
+import {ProfilePage} from "./components/UserForms/ProfilePage";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -94,9 +96,16 @@ export default class App extends Component {
 
 
             }/>
-        <Route path='/Cars'component={CarsView} />
 
-        <Route path='/Services' component={ServicesView} />
+          <Route path='/Cars'component={CarsView} />
+          <Route exact path='/ProfilePage'
+                 render={props =>(
+                     <ProfilePage
+                           user={this.state.user}
+                     />
+                 )}/>
+          <Route path='/OrderTab' component={OrderTab} />
+          <Route path='/Services' component={ServicesView} />
       </Layout>
     );
   }
