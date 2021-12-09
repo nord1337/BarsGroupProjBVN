@@ -43,7 +43,7 @@ export class CarsView extends Component {
                 {this.state.ProductCars.map((Car)=>
                     (
                         // console.log(Car)
-                         <ProductCard img={Car.imagePath} name={Car.name} id={Car.id} price={Car.price} Description={Car.description} />
+                         <ProductCard prod={Car} img={Car.imagePath} name={Car.name} id={Car.id} price={Car.price} Description={Car.description} />
                     )
                 )}
             </CardGroup>

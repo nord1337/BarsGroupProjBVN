@@ -44,7 +44,7 @@ export class ServicesView extends Component {
                     {this.state.TechServices.map((serv)=>
                         (
                             // console.log(Car)
-                            <ProductCard img={serv.imagePath} name={serv.name} id={serv.id} price={serv.price} Description={serv.description} />
+                            <ProductCard prod={serv} img={serv.imagePath} name={serv.name} id={serv.id} price={serv.price} Description={serv.description} />
                         )
                     )}
                 </CardGroup>
@@ -53,7 +53,7 @@ export class ServicesView extends Component {
                     {this.state.CosmeticServices.map((serv)=>
                         (
                             // console.log(Car)
-                            <ProductCard img={serv.imagePath} name={serv.name} id={serv.id} price={serv.price} Description={serv.description} />
+                            <ProductCard prod={serv} img={serv.imagePath} name={serv.name} id={serv.id} price={serv.price} Description={serv.description} />
                         )
                     )}
             </CardGroup>

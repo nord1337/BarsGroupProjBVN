@@ -8,7 +8,7 @@ namespace Team_Let1m_carShop.Dtos
 {
     public class OrderItemsArrayDto
     {
-        [JsonProperty("Order_Item")]
+        [JsonProperty("Order_items")]
         public OrderItemCreateDto[] OrderItem { get; set; }
     }
 }

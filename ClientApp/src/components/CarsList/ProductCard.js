@@ -2,22 +2,36 @@ import React, { Component } from 'react';
 import { CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle,CardText, Button} from 'reactstrap';
 import "./../ServicesList/ServicesView.css"
 import {render} from "react-dom";
-export class ProductCard extends React.Component{
-    constructor(props) {
-        super(props);
+import {useDispatch, useSelector} from "react-redux";
+import {deleteItemInCart, setItemInCart} from "../ProductCart/reducer";
+export const ProductCard=({prod})=> {
+
+
+    const dispatch = useDispatch();
+    const handleClick=(e)=>{
+        e.stopPropagation();
+        if(isItemInCard){
+            dispatch(deleteItemInCart(prod.id))
+        }
+        else{
+            dispatch(setItemInCart(prod))
+        }
+
+
     }
-        render() {
+    const items = useSelector(state=>state.cart.itemsInCart);
+    const isItemInCard=items.some(item=>item.id===prod.id);
             return(
                 <Card>
                     <CardImg
                         alt="Card image cap"
-                        src={this.props.img}
+                        src={prod.imagePath}
                         height = "228px"
                         width="100%"
                     />
                     <CardBody>
                         <CardTitle tag="h5">
-                            {this.props.name}
+                            {prod.name}
                         </CardTitle>
                         <CardSubtitle
                             className="mb-2 text-muted"
@@ -25,16 +39,26 @@ export class ProductCard extends React.Component{
                         >
                         </CardSubtitle>
                         <CardText>
-                            {this.props.Description} : {this.props.price}
+                            {prod.Description} : {prod.price}
                         </CardText>
+                        {   isItemInCard?
+                            <CardText>
+                                Уже в корзине!
+                                <Button onClick={handleClick}>
+                                    Убрать из корзины.
+                                </Button>
+                            </CardText>
 
-                        <Button >
+                            : <Button onClick={handleClick}>
                             Заказать
-                        </Button>
+                            </Button>
+
+                        }
+
                     </CardBody>
                 </Card>
             )
 
 
-        }
+        //}
 }

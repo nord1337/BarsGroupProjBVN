@@ -4,12 +4,14 @@ import { Layout } from './components/Layout';
 import { Home } from './components/HomeView/Home';
 import { CarsView } from './components/CarsList/CarsView';
 import { ServicesView } from './components/ServicesList/ServicesView';
-//import { Login } from './components/Login';
+import {Provider} from "react-redux";
 import './custom.css';
 import axios from "axios";
 import ProductService from "./components/api/ProductService";
 import {OrderTab} from "./components/UserForms/OrderTab";
 import {ProfilePage} from "./components/UserForms/ProfilePage";
+import {store} from "./components/ProductCart/ind";
+import {cartMenu} from "./components/ProductCart/cartMenu";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -84,29 +86,32 @@ export default class App extends Component {
     }
   render () {
     return (
-      <Layout loggedInStatus={this.state.loggedInStatus} handleLogout = {this.handleLogout}>
-        <Route exact path='/'
-            render={props =>(
-                <Home loggedInStatus={this.state.loggedInStatus}
-                      handleLogin={this.handleLogin}
-                      handleLogout={this.handleLogout}
-                      user={this.state.user}
-                />
-            )
+        <Provider store={store}>
+          <Layout loggedInStatus={this.state.loggedInStatus} handleLogout = {this.handleLogout}>
+            <Route exact path='/'
+                render={props =>(
+                    <Home loggedInStatus={this.state.loggedInStatus}
+                          handleLogin={this.handleLogin}
+                          handleLogout={this.handleLogout}
+                          user={this.state.user}
+                    />
+                )
 
 
-            }/>
+                }/>
 
-          <Route path='/Cars'component={CarsView} />
-          <Route exact path='/ProfilePage'
-                 render={props =>(
-                     <ProfilePage
-                           user={this.state.user}
-                     />
-                 )}/>
-          <Route path='/OrderTab' component={OrderTab} />
-          <Route path='/Services' component={ServicesView} />
-      </Layout>
+              <Route path='/Cars'component={CarsView} />
+              <Route exact path='/ProfilePage'
+                     render={props =>(
+                         <ProfilePage
+                               user={this.state.user}
+                         />
+                     )}/>
+              <Route path='/OrderTab' component={OrderTab} />
+              <Route path='/Services' component={ServicesView} />
+              <Route path='/cart' component={cartMenu}/>
+          </Layout>
+        </Provider>
     );
   }
 }

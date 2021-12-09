@@ -24,7 +24,9 @@ namespace Team_Let1m_carShop.Data
             
             foreach(var order_Item in order.Order_Items)
             {
-                order_Item.Product = _shopContext.Products.Where(x => x.Id == order_Item.ProductId).FirstOrDefault();
+                order_Item.Product = _shopContext.Products
+                    .Where(x => x.Id == order_Item.ProductId)
+                    .FirstOrDefault();
             }
 
             //shitcode ends

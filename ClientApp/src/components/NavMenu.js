@@ -18,6 +18,7 @@ import './NavMenu.css';
 import {Login} from "./UserForms/Login";
 import {Register} from "./UserForms/Register";
 import {render} from "react-dom";
+import {CartBlock} from "./cart-block";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -90,9 +91,7 @@ class DependentDropDown extends Component{
   render() {
     if(this.props.loggedInStatus==="LOGGED_IN"){
       return(
-          // здесь ссылка на корзину
-          // ссылка на профиль
-          //ссылка на заказы
+
           <UncontrolledDropdown
               inNavbar
               nav
@@ -104,6 +103,11 @@ class DependentDropDown extends Component{
               Options
             </DropdownToggle>
             <DropdownMenu right>
+              <DropdownItem>
+
+                <CartBlock/>
+
+              </DropdownItem>
 
               <DropdownItem>
                 <NavItem>
@@ -115,6 +119,7 @@ class DependentDropDown extends Component{
                   <NavLink tag={Link} className="text-dark" to="/OrderTab">My Orders</NavLink>
                 </NavItem>
               </DropdownItem>
+
 
               <DropdownItem divider />
               <DropdownItem>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Badge} from "reactstrap";
+import { Provider } from 'react-redux'
 export class ProfilePage extends React.Component{
     constructor(props) {
         super(props);
@@ -12,7 +13,7 @@ export class ProfilePage extends React.Component{
 
         return(
             <div>
-                
+
                 <h5>Firstname: {this.props.user.firstname}</h5>
                 <h5>Lastname: {this.props.user.lastname}</h5>
                 <h5>Email: {this.props.user.email}</h5>
